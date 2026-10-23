@@ -1,0 +1,138 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.root {
+  border-radius: $radius-input;
+}
+
+// Пустая зона 120px, пунктир 2px (DESIGN.md §5).
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+  font-size: 13px;
+  border: 2px dashed $color-border;
+  border-radius: $radius-input;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  @include focus-ring;
+
+  &:hover {
+    border-color: $color-accent;
+  }
+}
+
+.cloud {
+  margin-bottom: 6px;
+  color: $color-text-muted;
+}
+
+.hint {
+  margin-bottom: 6px;
+  color: $color-text-muted;
+}
+
+.browse {
+  font-weight: $fw-semibold;
+  color: $color-accent;
+}
+
+.invalid {
+  background-color: $color-danger-soft;
+  border-color: $color-danger;
+}
+
+// Файл тащат над полем — подсветка зоны/плитки.
+.dragging {
+  .dropzone,
+  .addTile {
+    background-color: $color-accent-soft;
+    border-color: $color-accent;
+  }
+}
+
+// Превью 195×90 по три в ряд (606 = 3 × 195 + 2 × 10), на мобилке — по два.
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  @include mobile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 4px 4px 6px;
+  background-color: $color-input;
+  border-radius: $radius-chip-lg;
+}
+
+.thumb {
+  position: relative;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 64px;
+  object-fit: cover;
+  border-radius: $radius-chip;
+}
+
+// Иконка 12px в 6px от правого верхнего угла картинки (макет 3.3); сама кнопка — 24×24.
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  padding: 6px;
+  color: $color-danger;
+  border-radius: $radius-chip;
+
+  @include focus-ring;
+
+  &:hover {
+    background-color: rgb(255 255 255 / 60%);
+  }
+}
+
+.name {
+  overflow: hidden;
+  font-size: 10px;
+  color: $color-text-muted;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.addTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 90px;
+  font-size: 13px;
+  font-weight: $fw-semibold;
+  color: $color-accent;
+  border: 2px dashed $color-border;
+  border-radius: $radius-chip-lg;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  @include focus-ring;
+
+  &:hover {
+    border-color: $color-accent;
+  }
+}

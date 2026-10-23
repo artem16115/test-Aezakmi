@@ -1,0 +1,1 @@
+export { RateAreaChart } from './RateAreaChart'

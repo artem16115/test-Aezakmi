@@ -1,0 +1,19 @@
+@use 'reset';
+@use 'tokens' as *;
+
+:root {
+  @include custom-properties;
+
+  font-family: $font-family;
+  font-weight: $fw-regular;
+  // Высоты текстовых блоков в макете ≈ 1.2 × кегль.
+  line-height: $line-height-base;
+  color: $color-primary;
+  background-color: $color-bg-main;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100dvh;
+}

@@ -1,0 +1,104 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+// Карточка 3.4: паддинг 28/32, вертикальный gap 18.
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 28px 32px;
+  background-color: $color-surface;
+  border-radius: $radius-card;
+  box-shadow: $shadow-kanban;
+
+  > * {
+    max-width: 100%;
+  }
+
+  @include tablet {
+    padding: 24px;
+  }
+
+  @include mobile {
+    padding: 20px;
+  }
+}
+
+.badges,
+.tags,
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: $fw-bold;
+  color: $color-primary;
+  overflow-wrap: anywhere;
+
+  @include mobile {
+    font-size: 18px;
+  }
+}
+
+.description {
+  font-size: 15px;
+  line-height: 22px;
+  color: $color-text-muted;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+// Разделитель над мета-рядом: border-top + паддинг 18 (как gap карточки).
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  align-self: stretch;
+  padding-top: 18px;
+  border-top: 1px solid $color-border;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metaLabel {
+  font-size: 11px;
+  font-weight: $fw-semibold;
+  color: $color-text-muted;
+  text-transform: uppercase;
+}
+
+.metaValue {
+  font-size: 15px;
+  font-weight: $fw-semibold;
+  color: $color-primary;
+}
+
+.images {
+  gap: 10px;
+}
+
+.image {
+  display: block;
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: $radius-chip-lg;
+}
+
+.edit {
+  @include mobile {
+    align-self: stretch;
+  }
+}

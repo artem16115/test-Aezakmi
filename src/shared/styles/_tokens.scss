@@ -1,0 +1,174 @@
+// Дизайн-токены из макета (docs/DESIGN.md §1).
+// Источник правды — карты ниже: из них генерируются CSS custom properties в :root
+// (см. global.scss), а SCSS-переменные ссылаются на эти custom properties.
+
+@use 'sass:map';
+
+$colors: (
+  'primary': #18184c,
+  'primary-hover': #25256a,
+  'text-muted': #8e93a1,
+  'accent': #2563eb,
+  'accent-soft': #e7eeff,
+  'danger': #ea3a3a,
+  'danger-soft': #fff2f2,
+  'success': #22b14c,
+  'success-soft': #e0f8e6,
+  'chart-bg-up': #f2fcf5,
+  'chart-bg-down': #fff5f5,
+  'warning': #e98d20,
+  'warning-soft': #fff0e0,
+  'purple': #814ee0,
+  'purple-soft': #eee4ff,
+  'red-soft': #ffe7e7,
+  'bg-page': #efeff4,
+  'bg-main': #f9f9fd,
+  'surface': #ffffff,
+  'input-login': #f6f6fb,
+  'input': #f2f3f9,
+  'chip': #f0f1f6,
+  'border': #e6e7ed,
+  'divider': #e3e4ea,
+  'row-hover': #f6f7fb,
+  'overlay': rgba(24, 24, 76, 0.24),
+);
+
+$radii: (
+  'login-card': 24px,
+  'card': 20px,
+  'input-lg': 16px,
+  'input': 14px,
+  'row': 12px,
+  'chip-lg': 10px,
+  'chip': 8px,
+);
+
+$shadows: (
+  'login-card': (
+    0 8px 32px rgba(24, 24, 76, 0.06),
+    0 2px 8px rgba(24, 24, 76, 0.03),
+  ),
+  'btn-login': 0 4px 16px rgba(24, 24, 76, 0.25),
+  'btn': 0 4px 12px rgba(24, 24, 76, 0.2),
+  'card': 0 2px 12px rgba(0, 0, 0, 0.04),
+  'kanban': (
+    0 6px 24px rgba(0, 0, 0, 0.06),
+    0 2px 6px rgba(0, 0, 0, 0.02),
+  ),
+  'sidebar': 2px 0 8px rgba(0, 0, 0, 0.04),
+  'sidebar-expanded': 4px 0 20px rgba(0, 0, 0, 0.08),
+  'mobile-nav': 0 -2px 8px rgba(0, 0, 0, 0.04),
+);
+
+$font-family:
+  'Inter Variable',
+  'Inter',
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  sans-serif;
+
+// Явное значение вместо `normal` (у Inter ≈ 1.21), чтобы высота строк не зависела от браузера.
+$line-height-base: 1.21;
+
+$font-weights: (
+  'regular': 400,
+  'medium': 500,
+  'semibold': 600,
+  'bold': 700,
+);
+
+// --- SCSS-переменные (ссылаются на custom properties) ---
+
+@function color($name) {
+  @if not map.has-key($colors, $name) {
+    @error 'Unknown color token: #{$name}';
+  }
+  @return var(--color-#{$name});
+}
+
+@function radius($name) {
+  @if not map.has-key($radii, $name) {
+    @error 'Unknown radius token: #{$name}';
+  }
+  @return var(--radius-#{$name});
+}
+
+@function shadow($name) {
+  @if not map.has-key($shadows, $name) {
+    @error 'Unknown shadow token: #{$name}';
+  }
+  @return var(--shadow-#{$name});
+}
+
+@function weight($name) {
+  @return map.get($font-weights, $name);
+}
+
+$color-primary: color('primary');
+$color-primary-hover: color('primary-hover');
+$color-text-muted: color('text-muted');
+$color-accent: color('accent');
+$color-accent-soft: color('accent-soft');
+$color-danger: color('danger');
+$color-danger-soft: color('danger-soft');
+$color-success: color('success');
+$color-success-soft: color('success-soft');
+$color-chart-bg-up: color('chart-bg-up');
+$color-chart-bg-down: color('chart-bg-down');
+$color-warning: color('warning');
+$color-warning-soft: color('warning-soft');
+$color-purple: color('purple');
+$color-purple-soft: color('purple-soft');
+$color-red-soft: color('red-soft');
+$color-bg-page: color('bg-page');
+$color-bg-main: color('bg-main');
+$color-surface: color('surface');
+$color-input-login: color('input-login');
+$color-input: color('input');
+$color-chip: color('chip');
+$color-border: color('border');
+$color-divider: color('divider');
+$color-row-hover: color('row-hover');
+$color-overlay: color('overlay');
+
+$radius-login-card: radius('login-card');
+$radius-card: radius('card');
+$radius-input-lg: radius('input-lg');
+$radius-input: radius('input');
+$radius-row: radius('row');
+$radius-chip-lg: radius('chip-lg');
+$radius-chip: radius('chip');
+
+$shadow-login-card: shadow('login-card');
+$shadow-btn-login: shadow('btn-login');
+$shadow-btn: shadow('btn');
+$shadow-card: shadow('card');
+$shadow-kanban: shadow('kanban');
+$shadow-sidebar: shadow('sidebar');
+$shadow-sidebar-expanded: shadow('sidebar-expanded');
+$shadow-mobile-nav: shadow('mobile-nav');
+
+$fw-regular: weight('regular');
+$fw-medium: weight('medium');
+$fw-semibold: weight('semibold');
+$fw-bold: weight('bold');
+
+$sidebar-width: 72px;
+$sidebar-width-expanded: 240px;
+$mobile-nav-height: 64px;
+
+// Выводит все токены как CSS custom properties (вызывается один раз в global.scss).
+@mixin custom-properties {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+  @each $name, $value in $radii {
+    --radius-#{$name}: #{$value};
+  }
+  @each $name, $value in $shadows {
+    --shadow-#{$name}: #{$value};
+  }
+  --sidebar-width: #{$sidebar-width};
+  --sidebar-width-expanded: #{$sidebar-width-expanded};
+}

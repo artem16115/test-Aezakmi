@@ -1,0 +1,21 @@
+// Размеры — замер эмодзи-флагов в макете: компактная таблица 2.2 (13×9), таблица 2.1 (14×10), панель графика (18×13).
+.flag {
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.xs {
+  width: 13px;
+  height: 9px;
+}
+
+.sm {
+  width: 14px;
+  height: 10px;
+}
+
+.md {
+  width: 18px;
+  height: 13px;
+}

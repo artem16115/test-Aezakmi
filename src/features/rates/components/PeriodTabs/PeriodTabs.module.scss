@@ -1,0 +1,32 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab {
+  height: 32px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: $fw-semibold;
+  color: $color-text-muted;
+  background-color: $color-chip;
+  border-radius: $radius-chip-lg;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  @include focus-ring;
+
+  &:hover:not(.active) {
+    color: $color-primary;
+  }
+}
+
+.active {
+  color: $color-surface;
+  background-color: $color-primary;
+}

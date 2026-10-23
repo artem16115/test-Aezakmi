@@ -1,0 +1,54 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 24px;
+  background-color: $color-bg-page;
+
+  @include mobile {
+    padding: 16px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 436px;
+  max-width: 100%;
+  padding: 48px;
+  background-color: $color-surface;
+  border-radius: $radius-login-card;
+  box-shadow: $shadow-login-card;
+
+  @include mobile {
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: $fw-bold;
+
+  @include mobile {
+    font-size: 28px;
+  }
+}
+
+.subtitle {
+  font-size: 15px;
+  font-weight: $fw-medium;
+  color: $color-text-muted;
+}

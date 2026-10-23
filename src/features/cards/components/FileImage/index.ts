@@ -1,0 +1,1 @@
+export { FileImage } from './FileImage'

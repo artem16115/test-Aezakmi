@@ -1,0 +1,11 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  color: $color-text-muted;
+}

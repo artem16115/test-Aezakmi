@@ -1,0 +1,42 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  height: calc(#{$mobile-nav-height} + env(safe-area-inset-bottom));
+  padding: 6px 16px env(safe-area-inset-bottom);
+  background-color: $color-surface;
+  box-shadow: $shadow-mobile-nav;
+
+  @include mobile {
+    display: grid;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 52px;
+  font-size: 10px;
+  font-weight: $fw-medium;
+  color: $color-text-muted;
+  border-radius: $radius-input;
+
+  @include focus-ring;
+}
+
+.itemActive {
+  font-weight: $fw-semibold;
+  color: $color-accent;
+  background-color: $color-accent-soft;
+}

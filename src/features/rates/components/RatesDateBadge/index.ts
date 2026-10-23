@@ -1,0 +1,1 @@
+export { RatesDateBadge } from './RatesDateBadge'

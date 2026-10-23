@@ -1,0 +1,48 @@
+@use '@/shared/styles/tokens' as *;
+
+.chart {
+  height: 200px;
+  overflow: hidden;
+  border-radius: $radius-input;
+  transition: opacity 0.2s ease;
+}
+
+.up {
+  color: $color-success;
+  background-color: $color-chart-bg-up;
+}
+
+.down {
+  color: $color-danger;
+  background-color: $color-chart-bg-down;
+}
+
+.dimmed {
+  opacity: 0.6;
+}
+
+.tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  background-color: $color-surface;
+  border-radius: $radius-chip;
+  box-shadow: $shadow-card;
+}
+
+.tooltipDate {
+  font-size: 11px;
+  color: $color-text-muted;
+}
+
+.tooltipValue {
+  font-size: 13px;
+  font-weight: $fw-semibold;
+  color: $color-primary;
+}
+
+// Обводка точки под курсором — цветом фона карточки (в SVG-атрибуты recharts токены не передать).
+.chart :global(.recharts-active-dot) circle {
+  stroke: $color-surface;
+}

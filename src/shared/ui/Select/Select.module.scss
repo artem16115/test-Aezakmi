@@ -1,0 +1,42 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.control {
+  position: relative;
+
+  @include field-surface;
+}
+
+.invalid {
+  @include field-invalid;
+}
+
+.select {
+  @include field-input-reset;
+
+  display: block;
+  width: 100%;
+  height: 47px;
+  padding: 0 44px 0 16px;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+
+  // Выбран пустой вариант — показываем как плейсхолдер.
+  &:has(option[value='']:checked) {
+    color: $color-text-muted;
+  }
+
+  option {
+    color: $color-primary;
+  }
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  color: $color-text-muted;
+  pointer-events: none;
+  transform: translateY(-50%);
+}

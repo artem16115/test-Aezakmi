@@ -1,0 +1,54 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+// Сайдбар зафиксирован слева, контент отодвигается паддингом на его ширину.
+.layout {
+  min-height: 100dvh;
+  padding-left: $sidebar-width;
+  background-color: $color-bg-main;
+
+  @include desktop {
+    &[data-expanded] {
+      padding-left: $sidebar-width-expanded;
+    }
+  }
+
+  @include mobile {
+    padding-left: 0;
+    padding-bottom: calc(#{$mobile-nav-height} + env(safe-area-inset-bottom));
+  }
+}
+
+.sidebar {
+  @include mobile {
+    display: none;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  background-color: $color-overlay;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  padding: 28px 36px;
+
+  @include tablet {
+    padding: 24px;
+  }
+
+  @include mobile {
+    gap: 20px;
+    padding: 16px;
+  }
+}

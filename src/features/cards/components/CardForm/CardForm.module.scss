@@ -1,0 +1,51 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Белая карточка: две колонки по 606 с gap 28, паддинг 28 (макет 3.1); < 1024 — одна колонка.
+.card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+  padding: 28px;
+  background-color: $color-surface;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+
+  @include below-lg {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  @include mobile {
+    padding: 20px;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  // На мобилке — на всю ширину столбиком, основная кнопка первой.
+  @include mobile {
+    flex-direction: column-reverse;
+
+    > * {
+      width: 100%;
+    }
+  }
+}

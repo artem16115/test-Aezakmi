@@ -1,0 +1,46 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+// Без графика (и на планшете/мобилке с графиком) блоки — обычные элементы колонки main
+// (порядок: заголовок → панель → таблица, отступы задаёт main).
+.page {
+  display: contents;
+}
+
+// Десктоп с выбранной валютой (2.2): слева заголовок + компактная таблица (gap 16),
+// справа панель 420px на всю высоту экрана (gap 20). Паддинг main в макете здесь 28 вместо 36.
+.withChart {
+  @include desktop {
+    display: grid;
+    grid-template-areas:
+      'header panel'
+      'table panel';
+    grid-template-rows: auto 1fr;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 16px 20px;
+    align-items: start;
+    min-height: calc(100dvh - 56px);
+    margin-inline: -8px;
+  }
+}
+
+.header {
+  grid-area: header;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  grid-area: panel;
+  align-self: stretch;
+  scroll-margin-top: 16px;
+}
+
+.panelFill {
+  flex: 1;
+}
+
+.table {
+  grid-area: table;
+  min-width: 0;
+}

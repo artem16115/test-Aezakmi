@@ -1,0 +1,7 @@
+@use '@/shared/styles/tokens' as *;
+
+.error {
+  font-size: 12px;
+  font-weight: $fw-medium;
+  color: $color-danger;
+}

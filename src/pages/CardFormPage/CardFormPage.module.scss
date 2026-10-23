@@ -1,0 +1,6 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  // Между заголовком и формой — 20 (макет 3.1).
+  gap: 20px;
+}

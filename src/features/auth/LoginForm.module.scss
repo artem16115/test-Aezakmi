@@ -1,0 +1,51 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// В макете между полями 16px, а когда под полями тексты ошибок (1.2) — 12px.
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &[data-has-errors] {
+    gap: 12px;
+  }
+}
+
+.toggle {
+  display: flex;
+  flex-shrink: 0;
+  color: $color-text-muted;
+  border-radius: 4px;
+
+  @include focus-ring;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.serverError {
+  font-size: 13px;
+  font-weight: $fw-medium;
+  color: $color-danger;
+  text-align: center;
+}
+
+.hint {
+  font-size: 12px;
+  color: $color-text-muted;
+  text-align: center;
+}

@@ -1,0 +1,112 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+// Макет 2.2: белая панель 420px, паддинг 24, gap 20.
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 24px;
+  background-color: $color-surface;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+
+  @include mobile {
+    padding: 20px 16px;
+  }
+}
+
+.header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 20px;
+  font-weight: $fw-bold;
+  color: $color-primary;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: 13px;
+  color: $color-text-muted;
+}
+
+.close {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: $color-text-muted;
+  border-radius: $radius-chip;
+
+  @include focus-ring;
+
+  &:hover {
+    color: $color-primary;
+    background-color: $color-input;
+  }
+}
+
+.value {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.rate {
+  font-size: 36px;
+  font-weight: $fw-bold;
+  color: $color-primary;
+}
+
+.change {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: $fw-semibold;
+  border-radius: $radius-chip;
+
+  &.up {
+    color: $color-success;
+    background-color: $color-success-soft;
+  }
+
+  &.down {
+    color: $color-danger;
+    background-color: $color-danger-soft;
+  }
+}
+
+svg.down {
+  transform: rotate(180deg);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  > * {
+    display: block;
+  }
+}
+
+.empty {
+  padding: 48px 0;
+  font-size: 14px;
+  color: $color-text-muted;
+  text-align: center;
+}

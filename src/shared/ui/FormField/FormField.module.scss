@@ -1,0 +1,23 @@
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: $fw-medium;
+  color: $color-primary;
+}
+
+.labelInvalid {
+  color: $color-danger;
+}
+
+.hidden {
+  @include visually-hidden;
+}
