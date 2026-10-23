@@ -1,7 +1,7 @@
 import { useId, type ComponentProps, type MouseEvent } from 'react'
-import { Calendar } from 'lucide-react'
 import { clsx } from 'clsx'
 import { formatLongDate } from '@/shared/lib/format'
+import { Emoji } from '../Emoji'
 import { FormField, fieldErrorId } from '../FormField'
 import styles from './DateField.module.scss'
 
@@ -51,7 +51,7 @@ export function DateField({
         <span className={clsx(styles.display, !value && styles.placeholder)} aria-hidden>
           {value ? formatLongDate(value) : placeholder}
         </span>
-        {!value && <Calendar size={16} className={styles.icon} aria-hidden />}
+        {!value && <Emoji name="calendar" size={16} />}
         <input
           id={inputId}
           type="date"

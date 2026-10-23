@@ -4,6 +4,7 @@ import { ButtonLink } from '@/shared/ui'
 import { ASSIGNEE_NAMES } from '../../model/constants'
 import type { Card, CardImage } from '../../model/types'
 import { PriorityBadge, StatusBadge } from '../CardBadges'
+import { DeleteCardButton } from '../DeleteCardButton'
 import { FileImage } from '../FileImage'
 import { TagChip } from '../TagChip'
 import styles from './KanbanCard.module.scss'
@@ -12,10 +13,12 @@ interface KanbanCardProps {
   card: Card
   /** Картинки есть только в текущей сессии; после перезагрузки ряд скрыт. */
   images: readonly CardImage[]
+  /** После удаления карточки; `remaining` — сколько карточек осталось. */
+  onDeleted: (remaining: number) => void
 }
 
 /** Превью карточки (экран 3.4). Пустые необязательные поля не оставляют пустых блоков. */
-export function KanbanCard({ card, images }: KanbanCardProps) {
+export function KanbanCard({ card, images, onDeleted }: KanbanCardProps) {
   const titleId = useId()
   const { id, title, description, priority, status, assignee, deadline, tags } = card
   const hasMeta = Boolean(assignee ?? deadline)
@@ -72,9 +75,12 @@ export function KanbanCard({ card, images }: KanbanCardProps) {
         </ul>
       )}
 
-      <ButtonLink to={`/cards/${id}/edit`} className={styles.edit} aria-describedby={titleId}>
-        Edit Card
-      </ButtonLink>
+      <div className={styles.actions}>
+        <ButtonLink to={`/cards/${id}/edit`} aria-describedby={titleId}>
+          Edit Card
+        </ButtonLink>
+        <DeleteCardButton card={card} onDeleted={onDeleted} aria-describedby={titleId} />
+      </div>
     </article>
   )
 }

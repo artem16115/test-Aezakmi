@@ -30,15 +30,6 @@
   color: $color-text-muted;
 }
 
-.icon {
-  flex-shrink: 0;
-  color: $color-text-muted;
-
-  .invalid & {
-    color: $color-danger;
-  }
-}
-
 // Сам инпут невидим и растянут на всё поле: клик в любом месте открывает пикер.
 .input {
   position: absolute;

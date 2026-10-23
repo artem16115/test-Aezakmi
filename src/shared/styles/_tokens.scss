@@ -158,6 +158,10 @@ $sidebar-width: 72px;
 $sidebar-width-expanded: 240px;
 $mobile-nav-height: 64px;
 
+// Раскрытие сайдбара: ширина, сдвиг контента, затемнение.
+$sidebar-duration: 220ms;
+$sidebar-transition: $sidebar-duration ease-out;
+
 // Выводит все токены как CSS custom properties (вызывается один раз в global.scss).
 @mixin custom-properties {
   @each $name, $value in $colors {

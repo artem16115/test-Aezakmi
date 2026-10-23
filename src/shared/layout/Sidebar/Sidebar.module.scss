@@ -8,18 +8,54 @@
   bottom: 0;
   left: 0;
   z-index: 20;
+  width: $sidebar-width;
+  overflow: hidden auto;
+  background-color: $color-surface;
+  box-shadow: $shadow-sidebar;
+  transition:
+    width $sidebar-transition,
+    box-shadow $sidebar-transition;
+}
+
+.sidebarExpanded {
+  width: $sidebar-width-expanded;
+  box-shadow: $shadow-sidebar-expanded;
+}
+
+// Обе панели лежат в левом верхнем углу; лишнее обрезает ширина контейнера.
+// Уходящая панель гаснет быстро, новая проявляется с небольшой задержкой.
+.panel {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  background-color: $color-surface;
+  min-height: 100%;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 100ms ease-out,
+    visibility 0s linear 100ms;
 }
+
+.panelActive {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 160ms ease-out 60ms,
+    visibility 0s;
+}
+
+// Отступ между пунктами меню в обоих видах. Сознательное отличие от макета
+// (там 0 в свёрнутом и 4 в раскрытом) — DESIGN.md §2.
+$item-gap: 8px;
 
 // --- Свёрнутый (72px) ---
 
 .collapsed {
   width: $sidebar-width;
   padding: 20px 10px;
-  box-shadow: $shadow-sidebar;
 }
 
 .logo {
@@ -42,7 +78,6 @@
 
 .logoIcon {
   flex-shrink: 0;
-  color: $color-primary;
 }
 
 .expandIcon {
@@ -59,6 +94,12 @@
   .expandIcon {
     display: block;
   }
+}
+
+.compactNav > ul {
+  display: flex;
+  flex-direction: column;
+  gap: $item-gap;
 }
 
 .compactItem {
@@ -101,7 +142,6 @@
 .expanded {
   width: $sidebar-width-expanded;
   padding: 24px 20px;
-  box-shadow: $shadow-sidebar-expanded;
 }
 
 .header {
@@ -157,7 +197,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: $item-gap;
   margin-top: 12px;
 }
 

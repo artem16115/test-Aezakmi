@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
 import styles from './Button.module.scss'
 
-export type ButtonVariant = 'primary' | 'outline'
+export type ButtonVariant = 'primary' | 'outline' | 'danger' | 'dangerOutline'
 /** lg — кнопка логина (56px), md — кнопки форм и страниц (43px). */
 export type ButtonSize = 'lg' | 'md'
 

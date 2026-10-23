@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router'
 import {
   CardForm,
+  DeleteCardButton,
   cardToFormValues,
   emptyCardFormValues,
   toSubmitPayload,
@@ -17,9 +19,22 @@ export function CardFormPage() {
   const navigate = useNavigate()
   const { cards, getCard, getImages, createCard, updateCard } = useCards()
   const card = id ? getCard(id) : undefined
+  // После удаления карточки нет, но переход уже запрошен — не перебиваем его своим.
+  const [deleted, setDeleted] = useState(false)
 
   // Неизвестный id → к списку.
-  if (id && !card) return <Navigate to="/cards" replace />
+  if (id && !card) return deleted ? null : <Navigate to="/cards" replace />
+
+  // replace: «Назад» не должен вести на форму удалённой карточки.
+  const handleDeleted = (remaining: number) => {
+    setDeleted(true)
+    if (remaining === 0) {
+      void navigate('/cards/new', { replace: true })
+      return
+    }
+    const state: CardSavedState = { cardSaved: 'deleted' }
+    void navigate('/cards', { replace: true, state })
+  }
 
   const handleSubmit = (data: CardFormOutput) => {
     // Имитация запроса на бэкенд (требование задания).
@@ -45,6 +60,7 @@ export function CardFormPage() {
         onSubmit={handleSubmit}
         // Создание без карточек: уходить некуда, Cancel просто очищает форму.
         onCancel={card || cards.length > 0 ? toList : undefined}
+        secondaryAction={card && <DeleteCardButton card={card} onDeleted={handleDeleted} />}
       />
     </div>
   )

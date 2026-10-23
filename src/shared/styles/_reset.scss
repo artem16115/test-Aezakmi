@@ -59,3 +59,17 @@ h4,
 p {
   overflow-wrap: break-word;
 }
+
+// Пользователь просит меньше движения — гасим переходы и анимации интерфейса целиком
+// (графику recharts гасит сам, `isAnimationActive="auto"`).
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  *::backdrop {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

@@ -97,8 +97,16 @@
   border-radius: $radius-chip-lg;
 }
 
-.edit {
+.actions {
+  display: flex;
+  gap: 12px;
+
+  // На мобилке — на всю ширину, кнопки поровну.
   @include mobile {
     align-self: stretch;
+
+    > * {
+      flex: 1;
+    }
   }
 }

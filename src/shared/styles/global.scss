@@ -17,3 +17,11 @@
 #root {
   min-height: 100dvh;
 }
+
+// Высота фиксированных панелей у нижнего края (нижняя навигация на мобилке задаёт её в AppLayout).
+// Зарегистрировано как <length>, чтобы JS читал готовое значение в px (выпадающий список).
+@property --fixed-bottom-inset {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}

@@ -1,4 +1,4 @@
-import { ArrowLeftRight, ClipboardList, type LucideIcon } from 'lucide-react'
+import type { EmojiName } from '@/shared/ui'
 
 export interface NavItem {
   to: string
@@ -6,10 +6,10 @@ export interface NavItem {
   shortLabel: string
   /** Подпись в раскрытом сайдбаре. */
   label: string
-  icon: LucideIcon
+  emoji: EmojiName
 }
 
 export const NAV_ITEMS: readonly NavItem[] = [
-  { to: '/rates', shortLabel: 'Rates', label: 'Exchange Rates', icon: ArrowLeftRight },
-  { to: '/cards', shortLabel: 'Cards', label: 'Kanban Cards', icon: ClipboardList },
+  { to: '/rates', shortLabel: 'Rates', label: 'Exchange Rates', emoji: 'currency-exchange' },
+  { to: '/cards', shortLabel: 'Cards', label: 'Kanban Cards', emoji: 'clipboard' },
 ]

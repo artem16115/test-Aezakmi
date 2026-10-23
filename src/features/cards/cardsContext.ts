@@ -10,6 +10,8 @@ export interface CardsContextValue {
   createCard: (input: CardInput, images: readonly CardImage[]) => Card
   /** Возвращает undefined, если карточки с таким id нет. */
   updateCard: (id: string, input: CardInput, images: readonly CardImage[]) => Card | undefined
+  /** Удаляет карточку из localStorage и её картинки из памяти. */
+  deleteCard: (id: string) => void
 }
 
 export const CardsContext = createContext<CardsContextValue | null>(null)

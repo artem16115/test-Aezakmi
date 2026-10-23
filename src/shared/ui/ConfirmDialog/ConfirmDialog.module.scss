@@ -1,0 +1,75 @@
+@use 'sass:map';
+@use '@/shared/styles/tokens' as *;
+@use '@/shared/styles/mixins' as *;
+
+// Сам <dialog> без паддинга: клик по нему (а не по .content) — это клик по затемнению.
+.dialog {
+  width: min(440px, calc(100% - 32px));
+  max-width: none;
+  padding: 0;
+  margin: auto;
+  color: $color-primary;
+  background-color: $color-surface;
+  border: none;
+  border-radius: $radius-card;
+  box-shadow: $shadow-login-card;
+
+  &[open] {
+    animation: dialog-in 180ms ease-out;
+  }
+
+  // Фолбэк — для браузеров, где ::backdrop не наследует custom properties от :root.
+  &::backdrop {
+    background-color: var(--color-overlay, #{map.get($colors, 'overlay')});
+    animation: backdrop-in 180ms ease-out;
+  }
+}
+
+.content {
+  padding: 28px;
+
+  @include mobile {
+    padding: 24px 20px;
+  }
+}
+
+.title {
+  font-size: 20px;
+  font-weight: $fw-bold;
+}
+
+.description {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: $color-text-muted;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+
+  @include mobile {
+    flex-direction: column;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}

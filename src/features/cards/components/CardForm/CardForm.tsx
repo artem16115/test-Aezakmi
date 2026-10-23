@@ -1,4 +1,4 @@
-import { useId, useMemo, useState } from 'react'
+import { useId, useMemo, useState, type ReactNode } from 'react'
 import { Controller, useController, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { isoDateAgo } from '@/shared/lib/format'
@@ -27,6 +27,8 @@ interface CardFormProps {
   savedDeadline?: string
   submitLabel: string
   onSubmit: (data: CardFormOutput) => void
+  /** Кнопка слева в ряду действий (Delete в форме редактирования). */
+  secondaryAction?: ReactNode
   /** Без обработчика Cancel просто сбрасывает форму. */
   onCancel?: () => void
 }
@@ -38,6 +40,7 @@ export function CardForm({
   submitLabel,
   onSubmit,
   onCancel,
+  secondaryAction,
 }: CardFormProps) {
   const id = useId()
   const [today] = useState(() => isoDateAgo({}))
@@ -97,30 +100,48 @@ export function CardForm({
             error={errors.description?.message}
             {...register('description')}
           />
-          <Select
-            label="Priority"
-            placeholder="Select priority"
-            options={PRIORITY_OPTIONS}
-            required
-            error={errors.priority?.message}
-            {...register('priority')}
+          <Controller
+            control={control}
+            name="priority"
+            render={({ field }) => (
+              <Select
+                label="Priority"
+                placeholder="Select priority"
+                options={PRIORITY_OPTIONS}
+                required
+                error={errors.priority?.message}
+                {...field}
+              />
+            )}
           />
-          <Select
-            label="Status"
-            placeholder="Select status"
-            options={STATUS_OPTIONS}
-            error={errors.status?.message}
-            {...register('status')}
+          <Controller
+            control={control}
+            name="status"
+            render={({ field }) => (
+              <Select
+                label="Status"
+                placeholder="Select status"
+                options={STATUS_OPTIONS}
+                error={errors.status?.message}
+                {...field}
+              />
+            )}
           />
         </div>
 
         <div className={styles.column}>
-          <Select
-            label="Assignee"
-            placeholder="Select assignee"
-            options={ASSIGNEE_OPTIONS}
-            error={errors.assignee?.message}
-            {...register('assignee')}
+          <Controller
+            control={control}
+            name="assignee"
+            render={({ field }) => (
+              <Select
+                label="Assignee"
+                placeholder="Select assignee"
+                options={ASSIGNEE_OPTIONS}
+                error={errors.assignee?.message}
+                {...field}
+              />
+            )}
           />
           <Controller
             control={control}
@@ -170,6 +191,7 @@ export function CardForm({
       </div>
 
       <div className={styles.actions}>
+        {secondaryAction && <div className={styles.secondary}>{secondaryAction}</div>}
         <Button variant="outline" onClick={handleCancel}>
           Cancel
         </Button>

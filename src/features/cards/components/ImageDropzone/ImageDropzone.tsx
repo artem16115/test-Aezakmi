@@ -1,8 +1,8 @@
 import { useRef, useState, type DragEvent } from 'react'
 import { flushSync } from 'react-dom'
-import { CloudUpload, Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import { clsx } from 'clsx'
-import { FormField, fieldErrorId } from '@/shared/ui'
+import { Emoji, FormField, fieldErrorId } from '@/shared/ui'
 import { LIMITS } from '../../model/constants'
 import { acceptImages } from '../../model/images'
 import type { CardImage } from '../../model/types'
@@ -113,7 +113,7 @@ export function ImageDropzone({
 
         {images.length === 0 ? (
           <button {...pickerButton} className={clsx(styles.dropzone, shownError && styles.invalid)}>
-            <CloudUpload size={28} className={styles.cloud} aria-hidden />
+            <Emoji name="cloud" size={28} className={styles.cloud} />
             <span className={styles.hint}>Drag &amp; drop images here</span>
             <span className={styles.browse}>or click to browse</span>
           </button>

@@ -41,6 +41,26 @@
   }
 }
 
+// Удаление: подтверждение в диалоге — заливка, кнопка-триггер — обводка с красным текстом.
+.danger {
+  color: $color-surface;
+  background-color: $color-danger;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.dangerOutline {
+  color: $color-danger;
+  background-color: $color-surface;
+  box-shadow: inset 0 0 0 1.5px $color-border;
+
+  &:hover:not(:disabled) {
+    background-color: $color-danger-soft;
+  }
+}
+
 .md {
   height: 43px;
   padding: 0 28px;

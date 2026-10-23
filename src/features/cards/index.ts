@@ -1,4 +1,5 @@
 export { CardForm } from './components/CardForm'
+export { DeleteCardButton } from './components/DeleteCardButton'
 export { KanbanCard } from './components/KanbanCard'
 export { CardsProvider } from './CardsProvider'
 export {

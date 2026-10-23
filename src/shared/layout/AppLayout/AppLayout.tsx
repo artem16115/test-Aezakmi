@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
+import { clsx } from 'clsx'
 import { readStorage, writeStorage } from '@/shared/lib/storage'
 import { DESKTOP_QUERY, useMediaQuery } from '@/shared/lib/useMediaQuery'
 import { MobileNav } from '../MobileNav'
@@ -63,15 +64,14 @@ export function AppLayout({ onLogout }: AppLayoutProps) {
         onLogout={onLogout}
         className={styles.sidebar}
       />
-      {isOverlay && (
-        <div
-          className={styles.backdrop}
-          aria-hidden
-          onClick={() => {
-            setOverlayOpen(false)
-          }}
-        />
-      )}
+      {/* Затемнение есть всегда (кроме десктопа и мобилки), чтобы плавно проявляться и гаснуть. */}
+      <div
+        className={clsx(styles.backdrop, isOverlay && styles.backdropVisible)}
+        aria-hidden
+        onClick={() => {
+          setOverlayOpen(false)
+        }}
+      />
       <main className={styles.main} inert={isOverlay}>
         <Outlet />
       </main>

@@ -1,14 +1,13 @@
-import { AlertTriangle, ArrowDown, Flame, Minus, type LucideIcon } from 'lucide-react'
-import { Badge, type BadgeTone } from '@/shared/ui'
+import { Badge, Emoji, type BadgeTone, type EmojiName } from '@/shared/ui'
 import { PRIORITY_LABELS, STATUS_LABELS } from '../../model/constants'
 import type { Priority, Status } from '../../model/types'
 
 // Цвета и иконки бейджей — DESIGN.md §5, «Цвета бейджей».
-const PRIORITY_STYLE: Record<Priority, { tone: BadgeTone; icon: LucideIcon }> = {
-  low: { tone: 'success', icon: ArrowDown },
-  medium: { tone: 'accent', icon: Minus },
-  high: { tone: 'warning', icon: Flame },
-  urgent: { tone: 'red', icon: AlertTriangle },
+const PRIORITY_STYLE: Record<Priority, { tone: BadgeTone; emoji: EmojiName }> = {
+  low: { tone: 'success', emoji: 'down-arrow' },
+  medium: { tone: 'accent', emoji: 'minus' },
+  high: { tone: 'warning', emoji: 'fire' },
+  urgent: { tone: 'red', emoji: 'police-car-light' },
 }
 
 const STATUS_TONE: Record<Status, BadgeTone> = {
@@ -19,9 +18,9 @@ const STATUS_TONE: Record<Status, BadgeTone> = {
 }
 
 export function PriorityBadge({ priority }: { priority: Priority }) {
-  const { tone, icon: Icon } = PRIORITY_STYLE[priority]
+  const { tone, emoji } = PRIORITY_STYLE[priority]
   return (
-    <Badge tone={tone} icon={<Icon size={12} strokeWidth={2.5} />}>
+    <Badge tone={tone} icon={<Emoji name={emoji} size={12} />}>
       {PRIORITY_LABELS[priority]}
     </Badge>
   )

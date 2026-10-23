@@ -54,9 +54,25 @@ export function CardsProvider({ children }: { children: ReactNode }) {
     [cards, commit],
   )
 
+  // Object URL картинок освобождают сами <img> (FileImage) при размонтировании превью;
+  // здесь — убираем File из памяти.
+  const deleteCard = useCallback(
+    (id: string) => {
+      const next = cards.filter((card) => card.id !== id)
+      setCards(next)
+      saveCards(next)
+      setImages((current) => {
+        const map = new Map(current)
+        map.delete(id)
+        return map
+      })
+    },
+    [cards],
+  )
+
   const value = useMemo<CardsContextValue>(
-    () => ({ cards, getCard, getImages, createCard, updateCard }),
-    [cards, getCard, getImages, createCard, updateCard],
+    () => ({ cards, getCard, getImages, createCard, updateCard, deleteCard }),
+    [cards, getCard, getImages, createCard, updateCard, deleteCard],
   )
 
   return <CardsContext value={value}>{children}</CardsContext>

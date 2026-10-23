@@ -40,12 +40,23 @@
   justify-content: flex-end;
   gap: 12px;
 
-  // На мобилке — на всю ширину столбиком, основная кнопка первой.
+  // На мобилке — на всю ширину столбиком, основная кнопка первой (Delete — последней).
   @include mobile {
     flex-direction: column-reverse;
 
-    > * {
+    > *,
+    .secondary > * {
       width: 100%;
     }
+  }
+}
+
+// Delete прижата влево, Cancel / Save — вправо.
+.secondary {
+  display: flex;
+  margin-right: auto;
+
+  @include mobile {
+    margin-right: 0;
   }
 }

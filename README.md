@@ -10,7 +10,7 @@ SPA из трёх разделов по макету: **логин**, **курс
 
 - **Логин** — mock-авторизация без бэкенда, валидация с подсветкой поля и текстом ошибки, logout. Без входа доступна только страница `/login`; после входа пользователь возвращается туда, куда шёл.
 - **Курсы валют** — таблица 8 валют с флагами (Course, Surrender, Buy, Change, Time) из открытого API. Клик по строке открывает график динамики выбранной валюты к USD за 1W / 1M / 3M / 6M / 1Y. Выбор валюты и периода хранится в URL (`/rates?currency=EUR&period=1M`) — ссылкой можно поделиться, «Назад» работает.
-- **Карточки** — форма на react-hook-form + zod: валидация, теги, картинки (выбор и drag & drop), alert с данными при отправке (имитация запроса). Карточки сохраняются в `localStorage`, их можно редактировать; список превью на `/cards`.
+- **Карточки** — форма на react-hook-form + zod: валидация, теги, картинки (выбор и drag & drop), alert с данными при отправке (имитация запроса). Свой выпадающий список (клавиатура, поиск по буквам, ARIA combobox) вместо нативного `<select>`. Карточки сохраняются в `localStorage`, их можно редактировать и удалять (с окном подтверждения); список превью на `/cards`.
 - Состояния loading / error / пусто для всех запросов (скелетоны, ошибка с кнопкой Retry), адаптив desktop / tablet / mobile (1440 → 320 px), доступность с клавиатуры и для скринридеров.
 
 ## Стек и почему он
@@ -24,7 +24,8 @@ SPA из трёх разделов по макету: **логин**, **курс
 | **react-hook-form + zod**               | типобезопасная валидация: одна схема — и правила, и тексты ошибок, и тип данных формы                     |
 | **recharts**                            | график динамики курса (грузится отдельным чанком только при открытии графика)                             |
 | **SCSS-модули**                         | стили изолированы по компонентам, все цвета и размеры — токены из макета                                  |
-| **lucide-react, flag-icons**            | SVG-иконки и флаги (эмодзи-флаги не отображаются на Windows)                                              |
+| **lucide-react, flag-icons**            | SVG-иконки интерфейса и флаги (эмодзи-флаги не отображаются на Windows)                                   |
+| **Fluent Emoji (SVG в проекте)**        | цветные эмодзи макета одинаково выглядят во всех ОС; это файлы, а не npm-зависимость (см. «Лицензии»)     |
 | **js-cookie, clsx, Inter (fontsource)** | кука сессии, склейка классов, локальный шрифт                                                             |
 | **Vitest**                              | юнит-тесты схем валидации и расчётов курсов                                                               |
 
@@ -96,7 +97,8 @@ src/
     rates/      # api/ (запросы + zod), hooks/, lib/ (расчёты), components/ (таблица, график), config
     cards/      # model/ (типы, схема, константы), хранение, контекст, components/ (форма, теги, картинки, превью)
   shared/
-    ui/         # Button, TextField, Select, Badge, Skeleton, ErrorState и др.
+    ui/         # Button, TextField, Select, ConfirmDialog, Emoji, Badge, Skeleton, ErrorState и др.
+    assets/     # emoji/ — SVG Microsoft Fluent Emoji
     layout/     # AppLayout, Sidebar, MobileNav, PageHeader
     lib/        # куки, localStorage, форматирование
     styles/     # токены, миксины (брейкпоинты), reset, глобальные стили
@@ -107,3 +109,7 @@ src/
 ## Деплой
 
 GitHub Actions (`.github/workflows/deploy.yml`) при каждом push в `main`: `npm ci` → lint → тесты → сборка → публикация на GitHub Pages (`actions/upload-pages-artifact` + `actions/deploy-pages`). В настройках репозитория: **Settings → Pages → Source: GitHub Actions**.
+
+## Лицензии
+
+Цветные эмодзи (💰 💱 📋 🚪 📅 ☁️ ⬇️ ➖ 🔥 🚨) — [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji), стиль Color, лицензия MIT, © Microsoft Corporation. SVG и текст лицензии (`LICENSE`) лежат в `src/shared/assets/emoji/`. В макете эмодзи в стиле Apple, но их нельзя свободно использовать, поэтому взят самый похожий бесплатный набор.

@@ -19,8 +19,9 @@
   height: 56px;
   padding: 0 20px;
   gap: 12px;
+  --field-bg: #{$color-input-login};
+
   font-size: 15px;
-  background-color: $color-input-login;
   border-radius: $radius-input-lg;
 }
 
