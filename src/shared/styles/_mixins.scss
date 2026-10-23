@@ -58,7 +58,6 @@ $bp-desktop: 1200px;
 
 // Общая «оболочка» полей ввода (TextField, TextArea, Select).
 // Обводка в макете внутренняя (stroke inside), поэтому рисуем её inset-тенью: размеры не меняются.
-// Фон поля лежит в --field-bg: его же берёт перекрытие автозаполнения (field-autofill).
 @mixin field-surface {
   --field-bg: #{$color-input};
 
@@ -82,12 +81,16 @@ $bp-desktop: 1200px;
   }
 }
 
-// Автозаполнение Chrome красит инпут своим фоном (прямоугольником поверх скругления)
-// и чёрным текстом — перекрываем фон inset-тенью цвета поля.
+// Автозаполнение Chrome красит инпут своим фоном (!important, не перебить) и чёрным текстом.
+// Фон не перекрываем тенью — она легла бы поверх рамки обёртки, — а откладываем его смену
+// на ~7 суток: инпут остаётся прозрачным (textarea — со своим фоном), рамку и фон рисует обёртка.
 @mixin field-autofill {
   caret-color: $color-primary;
   -webkit-text-fill-color: $color-primary;
-  box-shadow: inset 0 0 0 1000px var(--field-bg, #{$color-input});
+  // box-shadow — чтобы у textarea (она же оболочка) не пропала анимация рамки.
+  transition:
+    background-color 0s 600000s,
+    box-shadow 0.15s ease;
 }
 
 @mixin field-input-reset {
